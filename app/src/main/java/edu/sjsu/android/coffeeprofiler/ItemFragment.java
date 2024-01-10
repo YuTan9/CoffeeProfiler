@@ -26,9 +26,11 @@ public class ItemFragment extends Fragment {
 
     private final String AUTHORITY = "edu.sjsu.android.coffeeprofiler";
     private final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY);
-    static ArrayList<String> names = new ArrayList<>();
-    static ArrayList<String> drinks = new ArrayList<>();
-    static ArrayList<Integer> ratings = new ArrayList<>();
+//    static ArrayList<String> names = new ArrayList<>();
+//    static ArrayList<String> drinks = new ArrayList<>();
+//    static ArrayList<Integer> ratings = new ArrayList<>();
+
+    static ArrayList<Row> items = new ArrayList<>();
     static MyItemRecyclerViewAdapter adapter;
     static RecyclerView recyclerView;
 
@@ -48,9 +50,14 @@ public class ItemFragment extends Fragment {
         Cursor cursor = getContext().getContentResolver().query(CONTENT_URI, new String[]{"name", "rating", "drink"}, null, null, "rating DESC");
 
         while(cursor.moveToNext()){
-            names.add(cursor.getString(cursor.getColumnIndex("name")));
-            ratings.add(cursor.getInt(cursor.getColumnIndex("rating")));
-            drinks.add(cursor.getString(cursor.getColumnIndex("drink")));
+            items.add(new Row(
+                            cursor.getString(cursor.getColumnIndex("name")),
+                    cursor.getString(cursor.getColumnIndex("drink")),
+                    cursor.getInt(cursor.getColumnIndex("rating"))
+            ));
+//            names.add(cursor.getString(cursor.getColumnIndex("name")));
+//            ratings.add(cursor.getInt(cursor.getColumnIndex("rating")));
+//            drinks.add(cursor.getString(cursor.getColumnIndex("drink")));
         }
     }
     @Override
@@ -59,7 +66,8 @@ public class ItemFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_item_list, container, false);
 
         load();
-        adapter = new MyItemRecyclerViewAdapter(names, ratings, drinks);
+//        adapter = new MyItemRecyclerViewAdapter(names, ratings, drinks);
+        adapter = new MyItemRecyclerViewAdapter(items);
         recyclerView = (RecyclerView) view;
         recyclerView.setAdapter(adapter);
         swipeToDelete();
@@ -76,13 +84,16 @@ public class ItemFragment extends Fragment {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int pos = viewHolder.getLayoutPosition();
-                String name = names.get(pos);
-                int rating = ratings.get(pos);
-                String drink = drinks.get(pos);
-                getContext().getContentResolver().delete(CONTENT_URI, "name=? AND rating=? AND drink=?", new String[]{name, String.valueOf(rating), drink});
-                names.remove(pos);
-                ratings.remove(pos);
-                drinks.remove(pos);
+//                String name = names.get(pos);
+//                int rating = ratings.get(pos);
+//                String drink = drinks.get(pos);
+                Row current = items.get(pos);
+                getContext().getContentResolver().delete(CONTENT_URI, "name=? AND rating=? AND drink=?",
+                        new String[]{current.getName(), String.valueOf(current.getRating()), current.getDrink()});
+//                names.remove(pos);
+//                ratings.remove(pos);
+//                drinks.remove(pos);
+                items.remove(pos);
                 adapter.notifyItemRemoved(pos);
             }
         };

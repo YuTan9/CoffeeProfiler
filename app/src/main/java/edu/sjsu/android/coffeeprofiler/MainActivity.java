@@ -45,23 +45,25 @@ public class MainActivity extends AppCompatActivity {
                 // For example, fetch new data from a server or update the existing data
                 Cursor cursor = getContentResolver().query(CONTENT_URI, new String[]{"name", "rating", "drink"}, null, null, "rating DESC");
 
-                ItemFragment.names.clear();
-                ItemFragment.ratings.clear();
-                ItemFragment.drinks.clear();
+                ItemFragment.items.clear();
+                ItemFragment.adapter.notifyDataSetChanged();
                 while(cursor.moveToNext()){
-                    ItemFragment.names.add(cursor.getString(cursor.getColumnIndex("name")));
-                    ItemFragment.ratings.add(cursor.getInt(cursor.getColumnIndex("rating")));
-                    ItemFragment.drinks.add(cursor.getString(cursor.getColumnIndex("drink")));
+                    ItemFragment.items.add(new Row(
+                            cursor.getString(cursor.getColumnIndex("name")),
+                            cursor.getString(cursor.getColumnIndex("drink")),
+                            cursor.getInt(cursor.getColumnIndex("rating"))
+                    ));
                 }
                 // Stop the refreshing animation after a short delay
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        swipeRefreshLayout.setRefreshing(false);
-                    }
-                }, 300); // Change 2000 to the desired delay in milliseconds
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        swipeRefreshLayout.setRefreshing(false);
+//                    }
+//                }, 300); // Change 2000 to the desired delay in milliseconds
 
                 ItemFragment.adapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
     }

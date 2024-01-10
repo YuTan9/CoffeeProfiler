@@ -46,12 +46,15 @@ public class EditDetailDialogFragment extends DialogFragment {
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
         super.onDismiss(dialog);
-        Cursor cursor = getContext().getContentResolver().query(CONTENT_URI, new String[]{"name", "rating"}, null, null, "rating");
-        ItemFragment.names.clear();
-        ItemFragment.ratings.clear();
+        Cursor cursor = getContext().getContentResolver().query(CONTENT_URI, new String[]{"name", "rating", "drink"}, null, null, "rating DESC");
+        ItemFragment.items.clear();
+        ItemFragment.adapter.notifyDataSetChanged();
         while(cursor.moveToNext()){
-            ItemFragment.names.add(cursor.getString(cursor.getColumnIndex("name")));
-            ItemFragment.ratings.add(cursor.getInt(cursor.getColumnIndex("rating")));
+            ItemFragment.items.add(new Row(
+                    cursor.getString(cursor.getColumnIndex("name")),
+                    cursor.getString(cursor.getColumnIndex("drink")),
+                    cursor.getInt(cursor.getColumnIndex("rating"))
+            ));
         }
         ItemFragment.adapter.notifyDataSetChanged();
     }
