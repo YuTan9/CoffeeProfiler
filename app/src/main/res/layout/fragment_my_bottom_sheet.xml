@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/white"
+    android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+    <!-- Add your menu items here -->
+
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:inputType="textCapWords"
+        android:hint="Name" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Brew"
+        android:fontFamily="sans-serif-black"
+        android:textSize="28sp"/>
+
+    <EditText
+        android:id="@+id/drink"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:inputType="textCapWords"
+        android:hint="Drink" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+    <EditText
+        android:id="@+id/coarseness"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Coarseness"
+        android:inputType="number" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:textSize="16sp"
+        android:text="Heat"/>
+
+    <SeekBar
+        android:id="@+id/heat"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:backgroundTint="#676767"
+        android:max="10"
+        android:progress="4"
+        android:progressTint="#bb3370"
+        android:thumb="@drawable/seekbar" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:textSize="16sp"
+        android:text="Tamp"/>
+    <SeekBar
+        android:id="@+id/tamp"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:max="10"
+        android:progress="0"
+        android:progressTint="#bb3370"
+        android:thumb="@drawable/seekbar" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:textSize="16sp"
+        android:text="Water"/>
+    <SeekBar
+        android:id="@+id/water"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:max="10"
+        android:progress="9"
+        android:progressTint="#bb3370"
+        android:thumb="@drawable/seekbar" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rating"
+        android:fontFamily="sans-serif-black"
+        android:textSize="28sp"/>
+    <SeekBar
+        android:id="@+id/rating"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:max="5"
+        android:progress="2"
+        android:progressTint="#D6D6D6"
+        android:thumb="@drawable/seekbar" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Space
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/add"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:background="@drawable/round_button"
+            android:layout_weight="2"/>
+        <Space
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:background="@drawable/round_button"
+            android:layout_weight="2"/>
+        <Space
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+</LinearLayout>

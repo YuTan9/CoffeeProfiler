@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="roast_array">
+        <item>Select roast</item>
+        <item>Dark</item>
+        <item>Medium</item>
+        <item>Light</item>
+    </string-array>
+</resources>
