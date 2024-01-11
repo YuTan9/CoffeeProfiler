@@ -22,6 +22,12 @@ public class DB extends SQLiteOpenHelper{
     public static final String TAMP = "tamp";
     public static final String WATER = "water";
     public static final String RATING = "rating";
+
+    public static final String WEIGHT = "weight";
+
+    public static final String EXTRACTION = "extraction";
+
+    public static final String NOTE = "note";
     static final String CREATE_TABLE =
             " CREATE TABLE " +
                     TABLE_NAME +
@@ -34,7 +40,10 @@ public class DB extends SQLiteOpenHelper{
                             HEAT + " INT NOT NULL, " +
                             TAMP + " INT NOT NULL, " +
                             WATER + " INT NOT NULL, " +
-                            RATING + " INT NOT NULL" +
+                            RATING + " INT NOT NULL, " +
+                            NOTE + " TEXT, " +
+                            WEIGHT + " DOUBLE, " +
+                            EXTRACTION + " INT" +
                         ");";
     public DB(@Nullable Context context) {
         super(context, DATABASE_NAME, null, VERSION);

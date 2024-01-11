@@ -29,9 +29,11 @@ public class EditDetailDialogFragment extends DialogFragment {
     private final String AUTHORITY = "edu.sjsu.android.coffeeprofiler";
     private final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY);
 
-    private String name, roast, drink;
-    private int id, coarseness, heat,  tamp, water, rating;
-    public EditDetailDialogFragment(String n, String r, String d, int c, int h,  int t, int w, int ra, int i){
+    private String name, roast, drink, note;
+    private int id, coarseness, heat,  tamp, water, rating, extraction;
+
+    private double weight;
+    public EditDetailDialogFragment(String n, String r, String d, int c, int h,  int t, int w, int ra, int i, double we, int e, String no){
         super();
         name = n;
         roast = r;
@@ -42,6 +44,9 @@ public class EditDetailDialogFragment extends DialogFragment {
         water = w;
         rating = ra;
         id = i;
+        weight = we;
+        extraction = e;
+        note = no;
     }
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
@@ -71,6 +76,9 @@ public class EditDetailDialogFragment extends DialogFragment {
         SeekBar tampEle = (SeekBar) view.findViewById(R.id.tamp);
         SeekBar waterEle = (SeekBar) view.findViewById(R.id.water);
         SeekBar ratingEle = (SeekBar) view.findViewById(R.id.rating);
+        EditText noteEle = (EditText)view.findViewById(R.id.note);
+        EditText weightEle = (EditText)view.findViewById(R.id.weight);
+        SeekBar extractEle = (SeekBar) view.findViewById(R.id.extraction);
         
         nameEle.setText(this.name);
 
@@ -80,6 +88,9 @@ public class EditDetailDialogFragment extends DialogFragment {
         tampEle.setProgress(this.tamp);
         waterEle.setProgress(this.water);
         ratingEle.setProgress(this.rating);
+        noteEle.setText(this.note);
+        weightEle.setText(String.valueOf(this.weight));
+        extractEle.setProgress(this.extraction);
 
 
         Button add = (Button) view.findViewById(R.id.add);
@@ -121,6 +132,18 @@ public class EditDetailDialogFragment extends DialogFragment {
                 int _tamp = tampEle.getProgress();
                 int _water = waterEle.getProgress();
                 int _rating = ratingEle.getProgress();
+
+
+                double _weight = 0.0;
+                if(weightEle.getText().toString().equals("")){
+                    weightEle.setBackgroundColor(Color.RED);
+                    missingValue = true;
+                }else{
+                    weightEle.setBackgroundColor(Color.TRANSPARENT);
+                    _weight = Double.parseDouble(weightEle.getText().toString());
+                }
+                int _extraction = extractEle.getProgress();
+                String _note = noteEle.getText().toString();
                 if(missingValue){
                     return;
                 }else{
@@ -133,6 +156,9 @@ public class EditDetailDialogFragment extends DialogFragment {
                     values.put("tamp", _tamp);
                     values.put("water", _water);
                     values.put("rating", _rating);
+                    values.put("note", _note);
+                    values.put("extraction", _extraction);
+                    values.put("weight", _weight);
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                             if(getContext().getContentResolver().update(CONTENT_URI, values, "_id=?", new String[]{String.valueOf(id)}) != 0){
                                 Toast.makeText(getContext(), "Coffee updated", Toast.LENGTH_SHORT).show();
@@ -163,7 +189,7 @@ public class EditDetailDialogFragment extends DialogFragment {
         // Customize the dialog to show in the center of the screen and set width to 80%
         if (getDialog() != null) {
             WindowManager.LayoutParams params = getDialog().getWindow().getAttributes();
-            params.width = (int) (getResources().getDisplayMetrics().widthPixels * 0.9); // Set width to 80%
+            params.width = (int) (getResources().getDisplayMetrics().widthPixels * 0.9);
             getDialog().getWindow().setAttributes(params);
         }
         handleSpinner();

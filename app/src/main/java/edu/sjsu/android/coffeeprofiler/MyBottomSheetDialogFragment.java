@@ -71,6 +71,9 @@ public class MyBottomSheetDialogFragment extends DialogFragment {
         SeekBar ratingEle = (SeekBar) view.findViewById(R.id.rating);
         Button add = (Button) view.findViewById(R.id.add);
         Button cancel = (Button) view.findViewById(R.id.cancel);
+        EditText noteEle = (EditText)view.findViewById(R.id.note);
+        EditText weightEle = (EditText)view.findViewById(R.id.weight);
+        SeekBar extractEle = (SeekBar) view.findViewById(R.id.extraction);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,6 +111,16 @@ public class MyBottomSheetDialogFragment extends DialogFragment {
                 int tamp = tampEle.getProgress();
                 int water = waterEle.getProgress();
                 int rating = ratingEle.getProgress();
+                double _weight = 0.0;
+                if(weightEle.getText().toString().equals("")){
+                    weightEle.setBackgroundColor(Color.RED);
+                    missingValue = true;
+                }else{
+                    weightEle.setBackgroundColor(Color.TRANSPARENT);
+                    _weight = Double.parseDouble(weightEle.getText().toString());
+                }
+                int _extraction = extractEle.getProgress();
+                String _note = noteEle.getText().toString();
                 if(missingValue){
                     return;
                 }else{
@@ -120,6 +133,9 @@ public class MyBottomSheetDialogFragment extends DialogFragment {
                     values.put("tamp", tamp);
                     values.put("water", water);
                     values.put("rating", rating);
+                    values.put("note", _note);
+                    values.put("extraction", _extraction);
+                    values.put("weight", _weight);
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                             if(getContext().getContentResolver().insert(CONTENT_URI, values) != null){
                                 Toast.makeText(getContext(), "Coffee added", Toast.LENGTH_SHORT).show();
@@ -149,9 +165,10 @@ public class MyBottomSheetDialogFragment extends DialogFragment {
         // Customize the dialog to show in the center of the screen and set width to 80%
         if (getDialog() != null) {
             WindowManager.LayoutParams params = getDialog().getWindow().getAttributes();
-            params.width = (int) (getResources().getDisplayMetrics().widthPixels * 0.9); // Set width to 80%
+            params.width = (int) (getResources().getDisplayMetrics().widthPixels * 0.9);
             getDialog().getWindow().setAttributes(params);
         }
+
         handleSpinner();
     }
     private void handleSpinner() {

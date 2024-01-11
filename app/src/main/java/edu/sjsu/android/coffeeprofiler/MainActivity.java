@@ -41,8 +41,6 @@ public class MainActivity extends AppCompatActivity {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                // Perform the refresh operation
-                // For example, fetch new data from a server or update the existing data
                 Cursor cursor = getContentResolver().query(CONTENT_URI, new String[]{"name", "rating", "drink"}, null, null, "rating DESC");
 
                 ItemFragment.items.clear();
@@ -54,13 +52,6 @@ public class MainActivity extends AppCompatActivity {
                             cursor.getInt(cursor.getColumnIndex("rating"))
                     ));
                 }
-                // Stop the refreshing animation after a short delay
-//                new Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        swipeRefreshLayout.setRefreshing(false);
-//                    }
-//                }, 300); // Change 2000 to the desired delay in milliseconds
 
                 ItemFragment.adapter.notifyDataSetChanged();
                 swipeRefreshLayout.setRefreshing(false);

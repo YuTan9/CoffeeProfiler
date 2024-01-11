@@ -124,7 +124,10 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                         cursor.getInt(cursor.getColumnIndex("tamp")),
                         cursor.getInt(cursor.getColumnIndex("water")),
                         cursor.getInt(cursor.getColumnIndex("rating")),
-                        cursor.getInt(cursor.getColumnIndex("_id"))
+                        cursor.getInt(cursor.getColumnIndex("_id")),
+                        cursor.getDouble(cursor.getColumnIndex("weight")),
+                        cursor.getInt(cursor.getColumnIndex("extraction")),
+                        cursor.getString(cursor.getColumnIndex("note"))
                 );
                 popupMenuFragment.show(((AppCompatActivity)context).getSupportFragmentManager(), popupMenuFragment.getTag());
             }
