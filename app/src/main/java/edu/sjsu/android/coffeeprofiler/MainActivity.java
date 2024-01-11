@@ -10,6 +10,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -58,6 +60,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+// TODO: 1/11/2024
+//  implement search functionality
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.my_menu, menu);
+//        return true;
+//    }
+
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.app_bar_search) {
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
+
     private void showPopupMenu() {
         MyBottomSheetDialogFragment popupMenuFragment = new MyBottomSheetDialogFragment();
         popupMenuFragment.show(getSupportFragmentManager(), popupMenuFragment.getTag());
