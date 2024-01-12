@@ -84,20 +84,24 @@
                 android:textSize="16sp"
                 android:text="Heat"/>
 
-            <SeekBar
+<!--            <Space-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="5dp"/>-->
+
+            <edu.sjsu.android.coffeeprofiler.CustomSeekBar
                 android:id="@+id/heat"
-                style="@style/Widget.AppCompat.SeekBar.Discrete"
+                style="@android:style/Widget.Material.SeekBar"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="45dp"
+                android:layout_gravity="bottom"
                 android:backgroundTint="#676767"
                 android:max="10"
                 android:progress="4"
                 android:progressTint="#bb3370"
-                android:thumb="@drawable/seekbar" />
+                android:thumb="@drawable/seekbar"
+                />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="10dp"/>
+
 
             <TextView
                 android:layout_width="match_parent"
@@ -105,19 +109,18 @@
                 android:fontFamily="sans-serif-black"
                 android:textSize="16sp"
                 android:text="Tamp"/>
-            <SeekBar
+            <edu.sjsu.android.coffeeprofiler.CustomSeekBar
                 android:id="@+id/tamp"
-                style="@style/Widget.AppCompat.SeekBar.Discrete"
+                style="@android:style/Widget.Material.SeekBar"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="45dp"
+                android:layout_gravity="bottom"
                 android:max="10"
                 android:progress="0"
                 android:progressTint="#bb3370"
                 android:thumb="@drawable/seekbar" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="10dp"/>
+
 
             <TextView
                 android:layout_width="match_parent"
@@ -125,19 +128,20 @@
                 android:fontFamily="sans-serif-black"
                 android:textSize="16sp"
                 android:text="Water"/>
-            <SeekBar
+            <edu.sjsu.android.coffeeprofiler.CustomSeekBar
                 android:id="@+id/water"
-                style="@style/Widget.AppCompat.SeekBar.Discrete"
+                style="@android:style/Widget.Material.SeekBar"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:max="10"
-                android:progress="9"
+                android:layout_height="45dp"
+                android:max="100"
+                android:progress="90"
                 android:progressTint="#bb3370"
+                android:layout_gravity="bottom"
                 android:thumb="@drawable/seekbar" />
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="30dp"/>
+                android:layout_height="15dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -151,32 +155,29 @@
                 android:fontFamily="sans-serif-black"
                 android:textSize="16sp"
                 android:text="Rating"/>
-            <SeekBar
+            <edu.sjsu.android.coffeeprofiler.CustomSeekBar
                 android:id="@+id/rating"
-                style="@style/Widget.AppCompat.SeekBar.Discrete"
+                style="@android:style/Widget.Material.SeekBar"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="45dp"
                 android:max="5"
                 android:progress="2"
                 android:progressTint="#D6D6D6"
                 android:thumb="@drawable/seekbar" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="10dp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-black"
                 android:textSize="16sp"
                 android:text="Extraction"/>
-            <SeekBar
+            <edu.sjsu.android.coffeeprofiler.CustomSeekBar
                 android:id="@+id/extraction"
-                style="@style/Widget.AppCompat.SeekBar.Discrete"
+                style="@android:style/Widget.Material.SeekBar"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:max="1"
-                android:min="-1"
+                android:layout_height="45dp"
+                android:max="2"
+                android:min="-2"
                 android:progress="0"
                 android:progressTint="#D6D6D6"
                 android:thumb="@drawable/seekbar" />
@@ -190,7 +191,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Note"
-                android:inputType="textCapSentences"/>
+                android:inputType="textCapSentences|textMultiLine"/>
 
             <Space
                 android:layout_width="match_parent"
