@@ -28,6 +28,7 @@ public class DB extends SQLiteOpenHelper{
     public static final String EXTRACTION = "extraction";
 
     public static final String NOTE = "note";
+    public static final String WATER_WEIGHT = "water_weight";
     static final String CREATE_TABLE =
             " CREATE TABLE " +
                     TABLE_NAME +
@@ -43,7 +44,8 @@ public class DB extends SQLiteOpenHelper{
                             RATING + " INT NOT NULL, " +
                             NOTE + " TEXT, " +
                             WEIGHT + " DOUBLE, " +
-                            EXTRACTION + " INT" +
+                            EXTRACTION + " INT, " +
+                            WATER_WEIGHT + " INT" +
                         ");";
     public DB(@Nullable Context context) {
         super(context, DATABASE_NAME, null, VERSION);
@@ -65,12 +67,12 @@ public class DB extends SQLiteOpenHelper{
         return database.insert(TABLE_NAME, null, contentValues);
     }
 
-    public Cursor getAll(String orderBy) {
-        SQLiteDatabase database = getWritableDatabase();
-        return database.query(TABLE_NAME,
-                new String[]{NAME, ROAST, DRINK, COARSENESS, HEAT, TAMP, WATER, RATING},
-                null, null, null, null, orderBy);
-    }
+//    public Cursor getAll(String orderBy) {
+//        SQLiteDatabase database = getWritableDatabase();
+//        return database.query(TABLE_NAME,
+//                new String[]{NAME, ROAST, DRINK, COARSENESS, HEAT, TAMP, WATER, RATING},
+//                null, null, null, null, orderBy);
+//    }
 
     public Cursor query(@Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
         SQLiteDatabase database = getWritableDatabase();

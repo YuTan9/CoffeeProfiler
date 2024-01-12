@@ -25,6 +25,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -42,9 +43,6 @@ public class MyBottomSheetDialogFragment extends DialogFragment {
     public void onDismiss(@NonNull DialogInterface dialog) {
         super.onDismiss(dialog);
         Cursor cursor = getContext().getContentResolver().query(CONTENT_URI, new String[]{"name", "rating", "drink"}, null, null, "rating DESC");
-//        ItemFragment.names.clear();
-//        ItemFragment.ratings.clear();
-//        ItemFragment.drinks.clear();
         ItemFragment.items.clear();
         ItemFragment.adapter.notifyDataSetChanged();
         while(cursor.moveToNext()){
@@ -68,12 +66,40 @@ public class MyBottomSheetDialogFragment extends DialogFragment {
         SeekBar heatEle = (SeekBar) view.findViewById(R.id.heat);
         SeekBar tampEle = (SeekBar) view.findViewById(R.id.tamp);
         SeekBar waterEle = (SeekBar) view.findViewById(R.id.water);
+        SeekBar waterWeightEle = (SeekBar) view.findViewById(R.id.water_weight);
         SeekBar ratingEle = (SeekBar) view.findViewById(R.id.rating);
         Button add = (Button) view.findViewById(R.id.add);
         Button cancel = (Button) view.findViewById(R.id.cancel);
         EditText noteEle = (EditText)view.findViewById(R.id.note);
         EditText weightEle = (EditText)view.findViewById(R.id.weight);
         SeekBar extractEle = (SeekBar) view.findViewById(R.id.extraction);
+
+        waterWeightEle.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                if(!weightEle.getText().toString().equals("")){
+                    TextView pop_up_weight_text = (TextView) view.findViewById(R.id.pop_up_weight_text);
+                    double bean_weight = Double.parseDouble(weightEle.getText().toString());
+                    int ww = waterWeightEle.getProgress();
+                    String res = "Weight 1:" + String.valueOf( ww / (int)bean_weight);
+                    pop_up_weight_text.setText(res);
+                }else{
+                    TextView pop_up_weight_text = (TextView) view.findViewById(R.id.pop_up_weight_text);
+                    pop_up_weight_text.setText("Weight");
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,6 +136,7 @@ public class MyBottomSheetDialogFragment extends DialogFragment {
                 int heat = heatEle.getProgress();
                 int tamp = tampEle.getProgress();
                 int water = waterEle.getProgress();
+                int _water_weight = waterWeightEle.getProgress();
                 int rating = ratingEle.getProgress();
                 double _weight = 0.0;
                 if(weightEle.getText().toString().equals("")){
@@ -136,6 +163,7 @@ public class MyBottomSheetDialogFragment extends DialogFragment {
                     values.put("note", _note);
                     values.put("extraction", _extraction);
                     values.put("weight", _weight);
+                    values.put("water_weight", _water_weight);
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                             if(getContext().getContentResolver().insert(CONTENT_URI, values) != null){
                                 Toast.makeText(getContext(), "Coffee added", Toast.LENGTH_SHORT).show();

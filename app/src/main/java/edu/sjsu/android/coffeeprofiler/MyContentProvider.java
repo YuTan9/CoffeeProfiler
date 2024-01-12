@@ -26,7 +26,7 @@ public class MyContentProvider extends ContentProvider {
     @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
-        sortOrder = (sortOrder == null) ? "name" : sortOrder;
+        sortOrder = (sortOrder == null) ? "rating" : sortOrder;
         return database.query(projection, selection, selectionArgs, sortOrder);
     }
 

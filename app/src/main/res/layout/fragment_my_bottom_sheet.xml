@@ -128,6 +128,12 @@
                 android:fontFamily="sans-serif-black"
                 android:textSize="16sp"
                 android:text="Water"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:textSize="12sp"
+                android:text="Temperature"/>
             <edu.sjsu.android.coffeeprofiler.CustomSeekBar
                 android:id="@+id/water"
                 style="@android:style/Widget.Material.SeekBar"
@@ -135,6 +141,24 @@
                 android:layout_height="45dp"
                 android:max="100"
                 android:progress="90"
+                android:progressTint="#bb3370"
+                android:layout_gravity="bottom"
+                android:thumb="@drawable/seekbar" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/pop_up_weight_text"
+                android:fontFamily="sans-serif-black"
+                android:textSize="12sp"
+                android:text="Weight"/>
+
+            <edu.sjsu.android.coffeeprofiler.CustomSeekBar
+                android:id="@+id/water_weight"
+                style="@android:style/Widget.Material.SeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:max="400"
+                android:progress="200"
                 android:progressTint="#bb3370"
                 android:layout_gravity="bottom"
                 android:thumb="@drawable/seekbar" />

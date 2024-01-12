@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,10 +31,10 @@ public class EditDetailDialogFragment extends DialogFragment {
     private final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY);
 
     private String name, roast, drink, note;
-    private int id, coarseness, heat,  tamp, water, rating, extraction;
+    private int id, coarseness, heat,  tamp, water, rating, extraction, water_weight;
 
     private double weight;
-    public EditDetailDialogFragment(String n, String r, String d, int c, int h,  int t, int w, int ra, int i, double we, int e, String no){
+    public EditDetailDialogFragment(String n, String r, String d, int c, int h,  int t, int w, int ra, int i, double we, int e, String no, int ww){
         super();
         name = n;
         roast = r;
@@ -47,6 +48,7 @@ public class EditDetailDialogFragment extends DialogFragment {
         weight = we;
         extraction = e;
         note = no;
+        water_weight = ww;
     }
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
@@ -68,6 +70,7 @@ public class EditDetailDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_bottom_sheet, container, false);
 
+        Log.d("TAG", "onCreateView: "+String.valueOf(this.water_weight));
         EditText nameEle = (EditText)view.findViewById(R.id.name);
         Spinner roastEle = (Spinner)view.findViewById(R.id.spinner);
         EditText drinkEle = (EditText)view.findViewById(R.id.drink);
@@ -75,6 +78,7 @@ public class EditDetailDialogFragment extends DialogFragment {
         SeekBar heatEle = (SeekBar) view.findViewById(R.id.heat);
         SeekBar tampEle = (SeekBar) view.findViewById(R.id.tamp);
         SeekBar waterEle = (SeekBar) view.findViewById(R.id.water);
+        SeekBar waterWeightEle = (SeekBar) view.findViewById(R.id.water_weight);
         SeekBar ratingEle = (SeekBar) view.findViewById(R.id.rating);
         EditText noteEle = (EditText)view.findViewById(R.id.note);
         EditText weightEle = (EditText)view.findViewById(R.id.weight);
@@ -87,11 +91,33 @@ public class EditDetailDialogFragment extends DialogFragment {
         heatEle.setProgress(this.heat);
         tampEle.setProgress(this.tamp);
         waterEle.setProgress(this.water);
+        waterWeightEle.setProgress(this.water_weight);
         ratingEle.setProgress(this.rating);
         noteEle.setText(this.note);
         weightEle.setText(String.valueOf(this.weight));
         extractEle.setProgress(this.extraction);
 
+        waterWeightEle.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                if(!weightEle.getText().toString().equals("")){
+                    TextView pop_up_weight_text = (TextView) view.findViewById(R.id.pop_up_weight_text);
+                    double bean_weight = Double.parseDouble(weightEle.getText().toString());
+                    int ww = waterWeightEle.getProgress();
+                    String res = "Weight 1:" + String.valueOf( ww / (int) bean_weight);
+                    pop_up_weight_text.setText(res);
+                }else{
+                    TextView pop_up_weight_text = (TextView) view.findViewById(R.id.pop_up_weight_text);
+                    pop_up_weight_text.setText("Weight");
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) { }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
 
         Button add = (Button) view.findViewById(R.id.add);
         Button cancel = (Button) view.findViewById(R.id.cancel);
@@ -131,6 +157,7 @@ public class EditDetailDialogFragment extends DialogFragment {
                 int _heat = heatEle.getProgress();
                 int _tamp = tampEle.getProgress();
                 int _water = waterEle.getProgress();
+                int _water_weight = waterWeightEle.getProgress();
                 int _rating = ratingEle.getProgress();
 
 
@@ -159,6 +186,7 @@ public class EditDetailDialogFragment extends DialogFragment {
                     values.put("note", _note);
                     values.put("extraction", _extraction);
                     values.put("weight", _weight);
+                    values.put("water_weight", _water_weight);
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                             if(getContext().getContentResolver().update(CONTENT_URI, values, "_id=?", new String[]{String.valueOf(id)}) != 0){
                                 Toast.makeText(getContext(), "Coffee updated", Toast.LENGTH_SHORT).show();
