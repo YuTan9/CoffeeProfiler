@@ -42,14 +42,15 @@ public class MyBottomSheetDialogFragment extends DialogFragment {
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
         super.onDismiss(dialog);
-        Cursor cursor = getContext().getContentResolver().query(CONTENT_URI, new String[]{"name", "rating", "drink"}, null, null, "rating DESC");
+        Cursor cursor = getContext().getContentResolver().query(CONTENT_URI, new String[]{"name", "rating", "drink", "roast"}, null, null, "rating DESC");
         ItemFragment.items.clear();
         ItemFragment.adapter.notifyDataSetChanged();
         while(cursor.moveToNext()){
             ItemFragment.items.add(new Row(
                     cursor.getString(cursor.getColumnIndex("name")),
                     cursor.getString(cursor.getColumnIndex("drink")),
-                    cursor.getInt(cursor.getColumnIndex("rating"))
+                    cursor.getInt(cursor.getColumnIndex("rating")),
+                    cursor.getString(cursor.getColumnIndex("roast"))
             ));
         }
         ItemFragment.adapter.notifyDataSetChanged();
@@ -73,6 +74,7 @@ public class MyBottomSheetDialogFragment extends DialogFragment {
         EditText noteEle = (EditText)view.findViewById(R.id.note);
         EditText weightEle = (EditText)view.findViewById(R.id.weight);
         SeekBar extractEle = (SeekBar) view.findViewById(R.id.extraction);
+        EditText brandEle = (EditText) view.findViewById(R.id.brand);
 
         waterWeightEle.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -148,6 +150,15 @@ public class MyBottomSheetDialogFragment extends DialogFragment {
                 }
                 int _extraction = extractEle.getProgress();
                 String _note = noteEle.getText().toString();
+
+                String _brand = brandEle.getText().toString();
+                if(brandEle.getText().toString().equals("")){
+                    brandEle.setBackgroundColor(Color.RED);
+                    missingValue = true;
+                }else{
+                    brandEle.setBackgroundColor(Color.TRANSPARENT);
+                }
+
                 if(missingValue){
                     return;
                 }else{
@@ -164,6 +175,7 @@ public class MyBottomSheetDialogFragment extends DialogFragment {
                     values.put("extraction", _extraction);
                     values.put("weight", _weight);
                     values.put("water_weight", _water_weight);
+                    values.put("brand", _brand);
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                             if(getContext().getContentResolver().insert(CONTENT_URI, values) != null){
                                 Toast.makeText(getContext(), "Coffee added", Toast.LENGTH_SHORT).show();

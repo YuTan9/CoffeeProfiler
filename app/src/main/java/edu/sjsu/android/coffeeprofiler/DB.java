@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 
 public class DB extends SQLiteOpenHelper{
     private static final String DATABASE_NAME = "CoffeeDb";
-    private static final int VERSION = 1;
+    private static final int VERSION = 2;
     private static final String TABLE_NAME = "coffee";
     public static final String NAME = "name";
     public static final String ID = "_id";
@@ -29,6 +29,9 @@ public class DB extends SQLiteOpenHelper{
 
     public static final String NOTE = "note";
     public static final String WATER_WEIGHT = "water_weight";
+
+
+    private static final String BRAND = "brand";
     static final String CREATE_TABLE =
             " CREATE TABLE " +
                     TABLE_NAME +
@@ -43,9 +46,10 @@ public class DB extends SQLiteOpenHelper{
                             WATER + " INT NOT NULL, " +
                             RATING + " INT NOT NULL, " +
                             NOTE + " TEXT, " +
-                            WEIGHT + " DOUBLE, " +
+                            WEIGHT + " INT, " +
                             EXTRACTION + " INT, " +
-                            WATER_WEIGHT + " INT" +
+                            WATER_WEIGHT + " INT, " +
+                            BRAND + " TEXT NOT NULL DEFAULT ''" +
                         ");";
     public DB(@Nullable Context context) {
         super(context, DATABASE_NAME, null, VERSION);
@@ -58,8 +62,11 @@ public class DB extends SQLiteOpenHelper{
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldV, int newV) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        onCreate(sqLiteDatabase);
+//        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+//        onCreate(sqLiteDatabase);
+        if (newV > oldV) {
+            sqLiteDatabase.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN BRAND TEXT NOT NULL");
+        }
     }
 
     public long insert(ContentValues contentValues) {

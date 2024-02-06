@@ -20,6 +20,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <EditText
+                android:id="@+id/brand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textCapWords"
+                android:hint="Brand" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <EditText
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,7 +81,7 @@
                 android:id="@+id/weight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Weight"
+                android:hint="Bean weight"
                 android:inputType="number" />
 
             <Space
@@ -94,10 +105,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_gravity="bottom"
-                android:backgroundTint="#676767"
                 android:max="10"
                 android:progress="4"
-                android:progressTint="#bb3370"
+                android:progressTint="#705048"
                 android:thumb="@drawable/seekbar"
                 />
 
@@ -117,7 +127,7 @@
                 android:layout_gravity="bottom"
                 android:max="10"
                 android:progress="0"
-                android:progressTint="#bb3370"
+                android:progressTint="#705048"
                 android:thumb="@drawable/seekbar" />
 
 
@@ -141,7 +151,7 @@
                 android:layout_height="45dp"
                 android:max="100"
                 android:progress="90"
-                android:progressTint="#bb3370"
+                android:progressTint="#705048"
                 android:layout_gravity="bottom"
                 android:thumb="@drawable/seekbar" />
             <TextView
@@ -159,7 +169,7 @@
                 android:layout_height="45dp"
                 android:max="400"
                 android:progress="200"
-                android:progressTint="#bb3370"
+                android:progressTint="#705048"
                 android:layout_gravity="bottom"
                 android:thumb="@drawable/seekbar" />
 
@@ -186,8 +196,9 @@
                 android:layout_height="45dp"
                 android:max="5"
                 android:progress="2"
-                android:progressTint="#D6D6D6"
+                android:progressTint="#705048"
                 android:thumb="@drawable/seekbar" />
+
 
             <TextView
                 android:layout_width="match_parent"

@@ -5,8 +5,10 @@ import static android.widget.Toast.LENGTH_SHORT;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -107,6 +109,16 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             default:
                 break;
         }
+        String _roast = current.getRoast();
+        if (_roast.equals("Light")) {
+            holder.binding.recyclerRoast.setImageResource(R.drawable.light_roast_tag);
+        } else if (_roast.equals("Medium")) {
+            holder.binding.recyclerRoast.setImageResource(R.drawable.medium_roast_tag);
+        } else if (_roast.equals("Dark")) {
+            holder.binding.recyclerRoast.setImageResource(R.drawable.dark_roast_tag);
+        }else {
+            Log.d("TAG", "onBindViewHolder: changing recycler row roast tag failed");
+        }
         holder.binding.recyclerRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,7 +127,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                                 holder.binding.recyclerCoffeeDrink.getText().toString()} , null);
 
                 cursor.moveToNext();
-                EditDetailDialogFragment popupMenuFragment = new EditDetailDialogFragment(
+                @SuppressLint("Range") EditDetailDialogFragment popupMenuFragment = new EditDetailDialogFragment(
                         cursor.getString(cursor.getColumnIndex("name")),
                         cursor.getString(cursor.getColumnIndex("roast")),
                         cursor.getString(cursor.getColumnIndex("drink")),
@@ -128,7 +140,8 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                         cursor.getDouble(cursor.getColumnIndex("weight")),
                         cursor.getInt(cursor.getColumnIndex("extraction")),
                         cursor.getString(cursor.getColumnIndex("note")),
-                        cursor.getInt(cursor.getColumnIndex("water_weight"))
+                        cursor.getInt(cursor.getColumnIndex("water_weight")),
+                        cursor.getString(cursor.getColumnIndex("brand"))
                 );
                 popupMenuFragment.show(((AppCompatActivity)context).getSupportFragmentManager(), popupMenuFragment.getTag());
             }

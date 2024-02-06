@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="#F2F0EA"
+    tools:context=".MainActivity"
+    android:paddingTop="8dp">
 
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -17,7 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
@@ -29,7 +32,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:clickable="true"
-        android:backgroundTint="#a0bb33"
+        android:backgroundTint="#705048"
         app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

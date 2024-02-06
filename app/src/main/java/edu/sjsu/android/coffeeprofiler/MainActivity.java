@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Cursor cursor = getContentResolver().query(CONTENT_URI, new String[]{"name", "rating", "drink"}, null, null, "rating DESC");
+                Cursor cursor = getContentResolver().query(CONTENT_URI, new String[]{"name", "rating", "drink", "roast"}, null, null, "rating DESC");
 
                 ItemFragment.items.clear();
                 ItemFragment.adapter.notifyDataSetChanged();
@@ -51,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
                     ItemFragment.items.add(new Row(
                             cursor.getString(cursor.getColumnIndex("name")),
                             cursor.getString(cursor.getColumnIndex("drink")),
-                            cursor.getInt(cursor.getColumnIndex("rating"))
+                            cursor.getInt(cursor.getColumnIndex("rating")),
+                            cursor.getString(cursor.getColumnIndex("roast"))
                     ));
                 }
 

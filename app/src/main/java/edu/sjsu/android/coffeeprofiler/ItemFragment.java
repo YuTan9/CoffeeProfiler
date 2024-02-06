@@ -47,17 +47,15 @@ public class ItemFragment extends Fragment {
     }
 
     public void load(){
-        Cursor cursor = getContext().getContentResolver().query(CONTENT_URI, new String[]{"name", "rating", "drink"}, null, null, "rating DESC");
+        Cursor cursor = getContext().getContentResolver().query(CONTENT_URI, new String[]{"name", "rating", "drink", "roast"}, null, null, "rating DESC");
 
         while(cursor.moveToNext()){
             items.add(new Row(
                             cursor.getString(cursor.getColumnIndex("name")),
-                    cursor.getString(cursor.getColumnIndex("drink")),
-                    cursor.getInt(cursor.getColumnIndex("rating"))
+                            cursor.getString(cursor.getColumnIndex("drink")),
+                            cursor.getInt(cursor.getColumnIndex("rating")),
+                            cursor.getString(cursor.getColumnIndex("roast"))
             ));
-//            names.add(cursor.getString(cursor.getColumnIndex("name")));
-//            ratings.add(cursor.getInt(cursor.getColumnIndex("rating")));
-//            drinks.add(cursor.getString(cursor.getColumnIndex("drink")));
         }
     }
     @Override
